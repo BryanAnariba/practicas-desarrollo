@@ -1,5 +1,6 @@
 import 'colors';
 import express from 'express';
+import path from 'path';
 
 import { endPoints } from '../config/endPoint.js';
 import { authRoutes } from '../routes/auth.routes.js';
@@ -30,15 +31,14 @@ class Server {
     }
 
     staticFiles () {
-
+        this.app.use( express.static( path.join( 'public' ) ) ); 
     }
 
     start () {
         this.app.listen( this.app.get( 'PORT' ), () => {
             console.clear();
-            console.log( '============================'.green );
+            console.log( '====================================================================='.green );
             console.log( `Server started on port: ${ this.app.get( 'PORT' ) }`.cyan );
-            console.log( '============================'.green );
         });
     }
 }
